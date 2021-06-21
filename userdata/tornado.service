@@ -7,8 +7,8 @@ Type=simple
 User=root
 Group=root
 Environment="PORT=80"
-Environment="LOGFILE=/var/log/webserver"
-WorkingDirectory=/opt
+Environment="LOG_FILE=/var/log/webserver"
+WorkingDirectory=/opt/qmk_firmware
 ExecStart=/usr/bin/python3 /opt/tornado_server.py start
 Restart=always
 

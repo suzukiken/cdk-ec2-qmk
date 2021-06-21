@@ -2,6 +2,7 @@ import * as cdk from '@aws-cdk/core';
 import * as ec2 from '@aws-cdk/aws-ec2';
 import * as iam from '@aws-cdk/aws-iam';
 import * as assets from '@aws-cdk/aws-s3-assets';
+import * as s3 from '@aws-cdk/aws-s3';
 import * as path from 'path'
 
 export class CdkEc2QmkStack extends cdk.Stack {
@@ -12,8 +13,10 @@ export class CdkEc2QmkStack extends cdk.Stack {
     const ami_id = this.node.tryGetContext('ami_id')
     const key_name = this.node.tryGetContext('key_name')
     const securitygroup_id = this.node.tryGetContext('securitygroup_id')
+    const bucketname = cdk.Fn.importValue(this.node.tryGetContext('bucketname_exportname'))
     
     const vpc = ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: vpc_id })
+    const bucket = s3.Bucket.fromBucketName(this, 'Bucket', bucketname)
     
     const asset = new assets.Asset(this, 'UserdataAsset', {
       path: path.join(__dirname, '..', 'userdata'),
@@ -64,11 +67,17 @@ export class CdkEc2QmkStack extends cdk.Stack {
     })
     
     asset.grantRead( instance.role )
+    bucket.grantReadWrite( instance.role )
     
-    new cdk.CfnOutput(this, 'PrivateIp', { value: instance.instancePrivateIp })
-    new cdk.CfnOutput(this, 'PublicIp', { value: instance.instancePublicIp })
-    new cdk.CfnOutput(this, 'Bucket', { value: asset.s3BucketName })
-    new cdk.CfnOutput(this, 'Key', { value: asset.s3ObjectKey })
-
+    new cdk.CfnOutput(this, 'PrivateIp', { 
+      exportName: this.node.tryGetContext('ec2_privateip_exportname'),
+      value: instance.instancePrivateIp
+    })
+    
+    new cdk.CfnOutput(this, 'PublicIp', { 
+      exportName: this.node.tryGetContext('ec2_publicip_exportname'),
+      value: instance.instancePublicIp
+    })
+    
   }
 }

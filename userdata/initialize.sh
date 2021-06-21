@@ -50,6 +50,7 @@ rm -Rf /opt/qmk_firmware/nix
 rm -Rf /opt/qmk_firmware/platforms
 rm -Rf /opt/qmk_firmware/tests
 
+python3 -m pip install boto3
 python3 -m pip install tornado
 mv tornado_server.py /opt/tornado_server.py
 

@@ -16,6 +16,9 @@
     "vpc_id": "vpc-068c4966e38871db2",
     "ami_id": "ami-0ac97798ccf296e02",
     "key_name": "figment-research.aws.server",
-    "securitygroup_id": "sg-0a15178cf67b9f64e"
+    "securitygroup_id": "sg-0a15178cf67b9f64e",
+    "bucketname_exportname": "ec2qmk-keyboard-bucketname",
+    "ec2_privateip_exportname": "ec2qmk-private-ipaddress",
+    "ec2_publicip_exportname": "ec2qmk-public-ipaddress"
   }
 }
