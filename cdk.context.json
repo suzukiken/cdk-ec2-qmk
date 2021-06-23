@@ -29,5 +29,30 @@
         ]
       }
     ]
+  },
+  "load-balancer:account=656169322665:loadBalancerArn=arn$:aws:elasticloadbalancing:ap-northeast-1:656169322665:loadbalancer/app/alb/918376bd6748a5e6:loadBalancerType=application:region=ap-northeast-1": {
+    "loadBalancerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:656169322665:loadbalancer/app/alb/918376bd6748a5e6",
+    "loadBalancerCanonicalHostedZoneId": "Z14GRHDCWA56QT",
+    "loadBalancerDnsName": "alb-908122223.ap-northeast-1.elb.amazonaws.com",
+    "vpcId": "vpc-068c4966e38871db2",
+    "securityGroupIds": [
+      "sg-0c029928c855a2493"
+    ],
+    "ipAddressType": "ipv4"
+  },
+  "hosted-zone:account=656169322665:domainName=figment-research.com:region=ap-northeast-1": {
+    "Id": "/hostedzone/Z2JFRCXUA639Z3",
+    "Name": "figment-research.com."
+  },
+  "security-group:account=656169322665:region=ap-northeast-1:securityGroupId=sg-0c029928c855a2493": {
+    "securityGroupId": "sg-0c029928c855a2493",
+    "allowAllOutbound": true
+  },
+  "load-balancer-listener:account=656169322665:listenerPort=443:listenerProtocol=HTTPS:loadBalancerArn=arn$:aws:elasticloadbalancing:ap-northeast-1:656169322665:loadbalancer/app/alb/918376bd6748a5e6:loadBalancerType=application:region=ap-northeast-1": {
+    "listenerArn": "arn:aws:elasticloadbalancing:ap-northeast-1:656169322665:listener/app/alb/918376bd6748a5e6/6b1ffaaac5451bf1",
+    "listenerPort": 443,
+    "securityGroupIds": [
+      "sg-0c029928c855a2493"
+    ]
   }
 }

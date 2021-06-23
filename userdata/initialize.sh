@@ -25,20 +25,12 @@ apt install --no-install-recommends -y tar
 apt install --no-install-recommends -y wget
 apt install --no-install-recommends -y zip
 
-# upgrade gcc-arm-none-eabi from the default 5.4.1 to 6.3.1 due to ARM runtime issues
-# /bin/bash -c "set -o pipefail && \
-#     wget -q https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2 -O - | tar xj --strip-components=1 -C / && \
-#     rm -rf /arm-none-eabi/share/ /share/"
-
-# Install python packages
 python3 -m pip install --upgrade pip setuptools wheel
 python3 -m pip install qmk
 
 qmk setup -y -H /opt/qmk_firmware
 
-mv /opt/qmk_firmware/keyboards/2key2crawl .
 rm -Rf /opt/qmk_firmware/keyboards/*
-mv 2key2crawl /opt/qmk_firmware/keyboards/
 rm -Rf /opt/qmk_firmware/.git*
 rm -Rf /opt/qmk_firmware/.vscode
 rm -Rf /opt/qmk_firmware/api_data

@@ -4,8 +4,17 @@
 ## commands
 
  * `cdk deploy CdkEc2QmkStorageStack`
- * `cdk deploy CdkEc2QmkStack`
+ * `cdk deploy CdkEc2QmkEc2Stack`
  * `cdk deploy CdkEc2QmkFunctionStack`
+ * `cdk deploy CdkEc2QmkAutoscalingStack`
+ 
+## How to 
+
+1. create CdkEc2QmkEc2Stack.
+2. make the ec2 instance AMI.
+3. delete the ec2 instance.
+3. set the AMI id to cdk.json.
+4. launch service using CdkEc2QmkAutoscalingStack.
  
 ## Login to Ec2 Instance
 

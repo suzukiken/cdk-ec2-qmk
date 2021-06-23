@@ -5,12 +5,12 @@ import * as assets from '@aws-cdk/aws-s3-assets';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as path from 'path'
 
-export class CdkEc2QmkStack extends cdk.Stack {
+export class CdkEc2QmkEc2Stack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     
     const vpc_id = this.node.tryGetContext('vpc_id')
-    const ami_id = this.node.tryGetContext('ami_id')
+    const ami_id = this.node.tryGetContext('base_ami_id')
     const key_name = this.node.tryGetContext('key_name')
     const securitygroup_id = this.node.tryGetContext('securitygroup_id')
     const bucketname = cdk.Fn.importValue(this.node.tryGetContext('bucketname_exportname'))
