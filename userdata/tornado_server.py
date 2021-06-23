@@ -73,16 +73,10 @@ class GenByZipHandler(tornado.web.RequestHandler):
             elif path.is_dir():
                 shutil.rmtree(path)
 
-class GenByS3Handler(tornado.web.RequestHandler):
-    def get(self):
-        body = json.loads(self.request.body)
-        self.write(body)
-
 def make_app():
     return tornado.web.Application([
         (r"/", IndexHandler),
-        (r"/genbyzip/", GenByZipHandler),
-        (r"/genbys3/", GenByS3Handler),
+        (r"/genbyzip/", GenByZipHandler)
     ])
 
 if __name__ == "__main__":
