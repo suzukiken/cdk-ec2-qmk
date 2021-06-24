@@ -10,15 +10,16 @@ export class CdkEc2QmkAutoscalingStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     
-    const vpc_id = this.node.tryGetContext('vpc_id')
-    const alb_arn = this.node.tryGetContext('alb_arn')
+    const vpc_id = this.node.tryGetContext('vpcid_exportname')
+    const securitygroup_id = cdk.Fn.importValue(this.node.tryGetContext('securitygroupid_exportname'))
+    const alb_arn = this.node.tryGetContext('albarn_exportname')
+    
     const ami_id = this.node.tryGetContext('private_ami_id')
-    const securitygroup_id = this.node.tryGetContext('securitygroup_id')
     const domain = this.node.tryGetContext('domain')
     const subdomain = this.node.tryGetContext('subdomain')
     const host = subdomain + '.' + domain
     
-    const vpc = ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: vpc_id })
+    const vpc = ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: vpc_id,  })
     const security_group = ec2.SecurityGroup.fromSecurityGroupId(this, 'Ec2SecurityGrp', securitygroup_id)
     
     const linux = ec2.MachineImage.genericLinux({
@@ -48,10 +49,8 @@ export class CdkEc2QmkAutoscalingStack extends cdk.Stack {
       loadBalancerArn: alb_arn
     })
     
-    const listener = elbv2.ApplicationListener.fromLookup(this, 'Listener', {
-      loadBalancerArn: alb.loadBalancerArn,
-      listenerProtocol: elbv2.ApplicationProtocol.HTTPS,
-      listenerPort: 443
+    const listener = elbv2.ApplicationListener.fromLookup(this, 'HttpsListener', {
+      listenerArn: this.node.tryGetContext('alb_listenerarn_https_exportname')
     })
     
     const targetGroup = new elbv2.ApplicationTargetGroup(this, 'TargetGroup', {

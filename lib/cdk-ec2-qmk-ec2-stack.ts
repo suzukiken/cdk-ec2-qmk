@@ -12,7 +12,7 @@ export class CdkEc2QmkEc2Stack extends cdk.Stack {
     const vpc_id = this.node.tryGetContext('vpc_id')
     const ami_id = this.node.tryGetContext('base_ami_id')
     const key_name = this.node.tryGetContext('key_name')
-    const securitygroup_id = this.node.tryGetContext('securitygroup_id')
+    const securitygroup_id = cdk.Fn.importValue(this.node.tryGetContext('securitygroupid_exportname'))
     const bucketname = cdk.Fn.importValue(this.node.tryGetContext('bucketname_exportname'))
     
     const vpc = ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: vpc_id })
