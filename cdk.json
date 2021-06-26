@@ -13,12 +13,14 @@
     "@aws-cdk/aws-rds:lowercaseDbIdentifier": true,
     "@aws-cdk/aws-efs:defaultEncryptionAtRest": true,
     "@aws-cdk/aws-lambda:recognizeVersionProps": true,
-    "albarn_exportname": "arn:aws:elasticloadbalancing:ap-northeast-1:656169322665:loadbalancer/app/AlbVp-ALBAE-VZB8MLFI4JQU/f5fa54385d3614f8",
+    "alb_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:656169322665:loadbalancer/app/AlbVp-ALBAE-VZB8MLFI4JQU/f5fa54385d3614f8",
     "vpc_id": "vpc-073ec7be458bac780",
-    "securitygroupid_exportname": "v1-securitygroupid",
-    "securitygroupid": "sg-0771668a1dc71abc1",
-    "alb_listenerarn_http_exportname": "arn:aws:elasticloadbalancing:ap-northeast-1:656169322665:listener/app/AlbVp-ALBAE-VZB8MLFI4JQU/f5fa54385d3614f8/0fd60e23d7b28dce",
-    "alb_listenerarn_https_exportname": "arn:aws:elasticloadbalancing:ap-northeast-1:656169322665:listener/app/AlbVp-ALBAE-VZB8MLFI4JQU/f5fa54385d3614f8/fe3c9a805849dc53",
+    "vpc_name": "AlbVpcStack/VPC",
+    "lb_securitygroupid_exportname": "v1-securitygroupid",
+    "lbtarget_securitygroupid_exportname": "v1-lbtarget-securitygroupid",
+    "ec2standalone_securitygroupid_exportname": "v1-ec2standalone-securitygroupid",
+    "alb_http_listener_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:656169322665:listener/app/AlbVp-ALBAE-VZB8MLFI4JQU/f5fa54385d3614f8/0fd60e23d7b28dce",
+    "alb_https_listener_arn": "arn:aws:elasticloadbalancing:ap-northeast-1:656169322665:listener/app/AlbVp-ALBAE-VZB8MLFI4JQU/f5fa54385d3614f8/fe3c9a805849dc53",
     "base_ami_id": "ami-0ac97798ccf296e02",
     "private_ami_id": "ami-071d36dc5b315eff4",
     "key_name": "figment-research.aws.server",
@@ -26,7 +28,9 @@
     "ec2_privateip_exportname": "ec2qmk-private-ipaddress",
     "ec2_publicip_exportname": "ec2qmk-public-ipaddress",
     "domain": "figmentresearch.com",
-    "subdomain": "cdkec2qmk"
-    
+    "subdomain": "cdkec2qmk",
+    "public_subnetid_exportname": "v1-vpc-public-subnetid-exportname",
+    "private_subnetid_exportname": "v1-vpc-private-subnetid-exportname",
+    "vpclambda_securitygroupid_exportname": "v1-vpclambda-securitygroupid"
   }
 }

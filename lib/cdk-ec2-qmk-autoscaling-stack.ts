@@ -10,16 +10,17 @@ export class CdkEc2QmkAutoscalingStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     
-    const vpc_id = this.node.tryGetContext('vpcid_exportname')
-    const securitygroup_id = cdk.Fn.importValue(this.node.tryGetContext('securitygroupid_exportname'))
-    const alb_arn = this.node.tryGetContext('albarn_exportname')
+    const vpc_id = this.node.tryGetContext('vpc_id')
+    const vpc_name = this.node.tryGetContext('vpc_name')
+    const securitygroup_id = cdk.Fn.importValue(this.node.tryGetContext('lbtarget_securitygroupid_exportname'))
+    const alb_arn = this.node.tryGetContext('alb_arn')
     
     const ami_id = this.node.tryGetContext('private_ami_id')
     const domain = this.node.tryGetContext('domain')
     const subdomain = this.node.tryGetContext('subdomain')
     const host = subdomain + '.' + domain
     
-    const vpc = ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: vpc_id,  })
+    const vpc = ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: vpc_id, vpcName: vpc_name })
     const security_group = ec2.SecurityGroup.fromSecurityGroupId(this, 'Ec2SecurityGrp', securitygroup_id)
     
     const linux = ec2.MachineImage.genericLinux({
@@ -50,7 +51,7 @@ export class CdkEc2QmkAutoscalingStack extends cdk.Stack {
     })
     
     const listener = elbv2.ApplicationListener.fromLookup(this, 'HttpsListener', {
-      listenerArn: this.node.tryGetContext('alb_listenerarn_https_exportname')
+      listenerArn: this.node.tryGetContext('alb_https_listener_arn')
     })
     
     const targetGroup = new elbv2.ApplicationTargetGroup(this, 'TargetGroup', {

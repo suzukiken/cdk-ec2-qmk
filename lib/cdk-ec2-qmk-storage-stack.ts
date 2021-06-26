@@ -25,7 +25,7 @@ export class CdkEc2QmkStorageStack extends cdk.Stack {
       destinationKeyPrefix: 'keyboards/suzuki/'
     })
     
-    new cdk.CfnOutput(this, 'KeyboardDataBucketOutput', { 
+    new cdk.CfnOutput(this, 'StorageOutput', { 
       exportName: this.node.tryGetContext('bucketname_exportname'), 
       value: bucket.bucketName 
     })

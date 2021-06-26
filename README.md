@@ -4,9 +4,11 @@
 ## commands
 
  * `cdk deploy CdkEc2QmkStorageStack`
+ * `cdk deploy CdkEc2QmkSecgrpEc2Stack`
+ * `cdk deploy CdkEc2QmkSecgrpLbtgtStack`
  * `cdk deploy CdkEc2QmkEc2Stack`
- * `cdk deploy CdkEc2QmkFunctionStack`
  * `cdk deploy CdkEc2QmkAutoscalingStack`
+ * `cdk deploy CdkEc2QmkFunctionStack`
  
 ## How to 
 
@@ -24,3 +26,5 @@
 
  * `scp userdata/tornado_server.py admin@172.30.1.xxx:/opt`
  * `scp -i ~/.ssh/figment-researchawsserver.pem userdata/tornado_server.py admin@172.30.1.149:/opt`
+ * 
+ 

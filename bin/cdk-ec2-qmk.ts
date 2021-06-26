@@ -5,6 +5,8 @@ import { CdkEc2QmkStorageStack } from '../lib/cdk-ec2-qmk-storage-stack';
 import { CdkEc2QmkEc2Stack } from '../lib/cdk-ec2-qmk-ec2-stack';
 import { CdkEc2QmkAutoscalingStack } from '../lib/cdk-ec2-qmk-autoscaling-stack';
 import { CdkEc2QmkFunctionStack } from '../lib/cdk-ec2-qmk-function-stack';
+import { CdkEc2QmkSecgrpEc2Stack } from '../lib/cdk-ec2-qmk-secgrp-ec2-stack';
+import { CdkEc2QmkSecgrpLbtgtStack } from '../lib/cdk-ec2-qmk-secgrp-lbtgt-stack';
 
 const app = new cdk.App();
 
@@ -18,6 +20,12 @@ const autoscaling = new CdkEc2QmkAutoscalingStack(app, 'CdkEc2QmkAutoscalingStac
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 });
 const lambda = new CdkEc2QmkFunctionStack(app, 'CdkEc2QmkFunctionStack', {
+  env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+});
+const securitygroup_lbtg = new CdkEc2QmkSecgrpLbtgtStack(app, 'CdkEc2QmkSecgrpLbtgtStack', {
+  env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+});
+const securitygroup_ec2 = new CdkEc2QmkSecgrpEc2Stack(app, 'CdkEc2QmkSecgrpEc2Stack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 });
 

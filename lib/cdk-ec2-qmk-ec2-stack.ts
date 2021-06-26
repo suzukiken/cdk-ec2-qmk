@@ -10,12 +10,13 @@ export class CdkEc2QmkEc2Stack extends cdk.Stack {
     super(scope, id, props);
     
     const vpc_id = this.node.tryGetContext('vpc_id')
+    const vpc_name = this.node.tryGetContext('vpc_name')
     const ami_id = this.node.tryGetContext('base_ami_id')
     const key_name = this.node.tryGetContext('key_name')
-    const securitygroup_id = cdk.Fn.importValue(this.node.tryGetContext('securitygroupid_exportname'))
+    const securitygroup_id = cdk.Fn.importValue(this.node.tryGetContext('ec2standalone_securitygroupid_exportname'))
     const bucketname = cdk.Fn.importValue(this.node.tryGetContext('bucketname_exportname'))
     
-    const vpc = ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: vpc_id })
+    const vpc = ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: vpc_id, vpcName: vpc_name })
     const bucket = s3.Bucket.fromBucketName(this, 'Bucket', bucketname)
     
     const asset = new assets.Asset(this, 'UserdataAsset', {

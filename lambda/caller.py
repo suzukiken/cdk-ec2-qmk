@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import boto3
 import json
 import os
@@ -20,19 +19,31 @@ BUCKET_NAME = os.environ.get('BUCKET_NAME')
 KEY_PREFIX = os.environ.get('KEY_PREFIX')
 QMK_URL = os.environ.get('QMK_URL')
 
+
 def lambda_handler(event, context):
   
   print(event)
   
-  data = {
-    's3bucket': BUCKET_NAME,
-    's3keyprefix': KEY_PREFIX,
-    'keyboard': '2key2crawl',
-    'keymap': 'default'
+  '''
+  event
+  {
+    "keyboard": "2key2crawl/info.json",
+    "keymap": "default"
   }
+  '''
   
-  req = urllib.request.Request(QMK_URL, data=json.dumps(data).encode("utf-8"), method='GET')
+  print(os.environ)
+  
+  req = urllib.request.Request(QMK_URL, data=json.dumps({}).encode("utf-8"), method='GET')
   f = urllib.request.urlopen(req)
   
   print(f.read().decode('utf-8'))
   
+  client = boto3.client('s3')
+  
+  response = client.get_object(
+    Bucket=BUCKET_NAME,
+    Key=KEY_PREFIX + '/' + event.get('keyboard', '2key2crawl')
+  )
+  
+  print(response['Body'].read().decode('utf-8'))
